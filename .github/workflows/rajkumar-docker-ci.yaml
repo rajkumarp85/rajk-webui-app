@@ -18,10 +18,20 @@ jobs:
     - name: using pre-defined github workflow to get copy github repo code to runners
       uses: actions/checkout@v4
     - name: verify github code
-      run: "ls -a\ndocker-compose up -d \nsleep 2\ndocker-compose ps\n#magic___^_^___line\n"
+      run: "ls -a\ndocker-compose up -d \nsleep 2\ndocker-compose ps\n"
     - name: verify health applicaiton
       run: |
-        curl http://localhost:1234/health.html || exit 1
+        echo "Accessing the page using curl 
+        curl  http://localhost:1234/health.html
+
+    - name : upload docker site
+      run: |
+        docker login -u rajkumarp85 -p 8Str0ngb0x*
+        docker tag rajkumar-webui:version2 docker.io/rajkumarp85/rajkumarui:version1
+        docker push docker.io/rajkumarp85/rajkumarui:version1
+        docker logout
+
+
 
 
 
