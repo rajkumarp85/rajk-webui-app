@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  rajkumar-ui-app:
+    image: rajkumar-webui:version2
+    build: .
+    container_name: rajkumarc1
+    ports:
+      - 1234:80
