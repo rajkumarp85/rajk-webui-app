@@ -1,0 +1,23 @@
+#Create Pipeline with name
+name: Rajkumar App containerization Pipeline
+#Trigger section -- When this pipelin should start 
+on:
+  push:
+    branches:
+      - "main"
+
+#jobs - what jobs need to perform
+
+jobs:
+  rajkumar-image-build:
+    runs-on: ubuntu-latest
+    #This server will be provison by github backend for this job
+    steps:
+      - name: run some basic commands on above server to do some verification
+        run: |
+          uname -r 
+          whoami
+          cat /etc/os-release
+          docker version
+          docker-compose version
+  
