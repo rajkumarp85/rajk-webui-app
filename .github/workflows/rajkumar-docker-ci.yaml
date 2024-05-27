@@ -18,10 +18,10 @@ jobs:
     - name: using pre-defined github workflow to get copy github repo code to runners
       uses: actions/checkout@v4
     - name: verify github code
+      run: "ls -a\ndocker-compose up -d \nsleep 2\ndocker-compose ps\n#magic___^_^___line\n"
+    - name: verify health applicaiton
       run: |
-        ls -a
-        docker-compose up -d 
-        sleep 2
-        docker-compose ps
-      
+        curl http://localhost:1234/health.html || exit 1
+
+
 
