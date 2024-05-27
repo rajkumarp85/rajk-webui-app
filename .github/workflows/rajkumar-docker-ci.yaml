@@ -4,7 +4,7 @@ name: Rajkumar App containerization Pipeline
 on:
   push:
     branches:
-      - "main"
+    - "main"
 
 #jobs - what jobs need to perform
 
@@ -13,15 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     #This server will be provison by github backend for this job
     steps:
-      - name: run some basic commands on above server to do some verification
-        run: |
-          uname -r 
-          whoami
-          cat /etc/os-release
-          docker version
-          docker-compose version
-      - name: using pre-defined github workflow to get copy github repo code to runners 
-        uses: actions/checkout@v4
-      - name: verify github code
-        run: ls -above  
+    - name: run some basic commands on above server to do some verification
+      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\n"
+    - name: using pre-defined github workflow to get copy github repo code to runners
+      uses: actions/checkout@v4
+    - name: verify github code
+      run: ls -a
 
