@@ -4,7 +4,7 @@ name: Rajkumar App containerization Pipeline
 on:
   push:
     branches:
-    - "main"
+    - "dev"
 
 #jobs - what jobs need to perform
 
@@ -28,8 +28,13 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: rebuild image in docker hub and push it doccker hub
-      run:
-        echo "this is updated "
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkumar-webui:version2
+
+    - name: Docker logout from runners
+      run: docker logout
 
 
 
