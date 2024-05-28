@@ -23,7 +23,7 @@ jobs:
       with:
         projectBaseDir: .
         args: >
-          -Dsonar.ProjectKey=rajk-python-project #magic___^_^___line
+          -Dsonar.projectKey=rajk-python-project 
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
