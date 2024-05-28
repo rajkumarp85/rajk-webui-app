@@ -17,7 +17,8 @@ jobs:
       run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\n"
     - name: using pre-defined github workflow to get copy github repo code to runners
       uses: actions/checkout@v4
-    - name: Offical Sonarqube scan
+
+    - name: Offical Sonarqube scan update
       uses: SonarSource/sonarqube-scan-action@v2.1.0
       with:
         projectBaseDir: .
