@@ -14,7 +14,7 @@ jobs:
     #This server will be provison by github backend for this job
     steps:
     - name: run some basic commands on above server to do some verification
-      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\n"
+      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\nsonarqube-scanner --version\n"
     - name: using pre-defined github workflow to get copy github repo code to runners
       uses: actions/checkout@v4
     - name: verify github code
@@ -35,9 +35,3 @@ jobs:
 
     - name: Docker logout from runners
       run: docker logout
-
-
-
-
-
-
