@@ -14,9 +14,20 @@ jobs:
     #This server will be provison by github backend for this job
     steps:
     - name: run some basic commands on above server to do some verification
-      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\nsonarqube-scanner --version\n"
+      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\n"
     - name: using pre-defined github workflow to get copy github repo code to runners
       uses: actions/checkout@v4
+    - name: Offical Sonarqube scan
+      uses: SonarSource/sonarqube-scan-action@v2.1.0
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.ProjectKey=rajk-python-project
+
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+
     - name: verify github code
       run: "ls -a\ndocker-compose up -d \nsleep 2\ndocker-compose ps\n"
     - name: upload docker site
