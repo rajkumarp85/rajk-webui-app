@@ -23,11 +23,10 @@ jobs:
       with:
         projectBaseDir: .
         args: >
-          -Dsonar.ProjectKey=rajk-python-project
-
+          -Dsonar.ProjectKey=rajk-python-project #magic___^_^___line
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
     - name: verify github code
       run: "ls -a\ndocker-compose up -d \nsleep 2\ndocker-compose ps\n"
