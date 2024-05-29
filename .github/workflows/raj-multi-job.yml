@@ -55,10 +55,10 @@ jobs:
           sleep 2
           docker-compose ps
 
-      - name: verify health sonar
-        run: |
-          echo "access health"
-          curl  http://localhost.1234 | exit 1
+#      - name: verify health sonar
+#        run: |
+#          echo "access health"
+#          curl  http://localhost.1234 | exit 1
 
       - id: ecr-puplish
         uses: bitovi/github-actions-ecr-publish@v0.1.0
