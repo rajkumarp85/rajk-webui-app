@@ -1,0 +1,33 @@
+#Create Pipeline with name
+name: Rajkumar App containerization Pipeline
+#Trigger section -- When this pipelin should start 
+on:
+  push:
+    branches:
+    - "dev"
+
+#creating multiple jobs
+jobs:
+  rajk-code-checkjob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking only
+        run: |
+          echo "just checking"
+          whoami
+
+  rajk-sast-job:
+    runs-on: windows-latest
+    needs: rajk-code-checkjob 
+    steps:
+      - name : checking docker version 
+        run: |
+          docker version
+  rajk-build-job:
+    runs-on: macos-latest
+    needs: rajk-sast-job
+    steps:
+      - name: just checking version
+        run: |
+          echo "python version checking"
+          python -V
