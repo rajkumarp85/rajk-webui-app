@@ -11,6 +11,15 @@ jobs:
   rajk-sast-job:
     runs-on: ubuntu-latest
     steps:
+      - name: Offical Sonarqube scan update
+        uses: SonarSource/sonarqube-scan-action@v2.1.0
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.projectKey=rajk-python-project 
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 #      - name: just checking version
 #        run: |
 #          echo pwd
