@@ -9,7 +9,7 @@ on:
 #creating multiple jobs
 jobs:
   rajk-sast-job:
-    runs-on: windows-latest
+    runs-on: sonarqube-latest
     steps:
       - name: just checking version
         run: |
