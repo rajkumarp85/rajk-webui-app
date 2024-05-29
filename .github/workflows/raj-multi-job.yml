@@ -10,29 +10,11 @@ on:
 jobs:
   rajk-sast-job:
     runs-on: windows-latest
-
     steps:
-      - name : checking docker version 
+      - name: just checking version
         run: |
-          docker version
-      - name: fetch git code
-        uses: actions/checkout@v4
-
-        - name: Offical Sonarqube scan update
-        uses: SonarSource/sonarqube-scan-action@v2.1.0
-        with:
-          projectBaseDir: .
-          args: >
-            -Dsonar.projectKey=rajk-python-project 
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
-        -name : using loca
-          run: |
-            pwd
-            sonar-scanner.bat -D"sonar.projectKey=rajk-python-project" -D"sonar.sources=." -D"sonar.host.url=http://44.219.46.64:9000" -D"sonar.token=sqp_4cfb7f50e0b877ae84c8aa7324e277c8b5e238a4"
-
+          echo pwd
+          sonar-scanner.bat -D"sonar.projectKey=rajk-python-project" -D"sonar.sources=." -D"sonar.host.url=http://44.219.46.64:9000" -D"sonar.token=sqp_4cfb7f50e0b877ae84c8aa7324e277c8b5e238a4"
 
   rajk-build-job:
     runs-on: ubuntu-latest
