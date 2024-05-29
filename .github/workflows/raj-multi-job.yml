@@ -58,7 +58,7 @@ jobs:
       - name: verify health sonar
         run: |
           echo "access health"
-          curl  http://localhost.1234/health.html
+          curl  http://localhost.1234
 
       - id: ecr-puplish
         uses: bitovi/github-actions-ecr-publish@v0.1.0
