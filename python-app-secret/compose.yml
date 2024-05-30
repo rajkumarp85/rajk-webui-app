@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  rajkapp:
+    image: rajkpython:v1
+    build: .
+    container_name: rajkpyc1
+    tty: true
