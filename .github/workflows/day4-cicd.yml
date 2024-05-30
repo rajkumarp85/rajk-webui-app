@@ -1,0 +1,31 @@
+#Create Pipeline with name
+name: Rajkumar App containerization Pipeline
+#Trigger section -- When this pipelin should start 
+on:
+  push:
+    branches:
+    - "dev"
+
+#jobs - what jobs need to perform
+
+jobs:
+  rajkumar-image-build:
+    runs-on: ubuntu-latest
+    #This server will be provison by github backend for this job
+    steps:
+    - name: run some basic commands on above server to do some verification
+      run: "uname -r \nwhoami\ncat /etc/os-release\ndocker version\ndocker-compose version\n"
+    - name: using pre-defined github workflow to get copy github repo code to runners
+      uses: actions/checkout@v4
+
+    - name: Offical Sonarqube scan update
+      uses: SonarSource/sonarqube-scan-action@v2.1.0
+      with:
+        projectBaseDir: ./python-app-secret
+        args: >
+          -Dsonar.projectKey=rajk-project 
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+ 
