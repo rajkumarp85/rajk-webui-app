@@ -86,3 +86,8 @@ jobs:
         cd rajk-ecs
         npx cdk bootstrap
         npx cdk deploy --no-rollback --require-approval never
+    
+    - name: CDK destroy
+      run: |
+       cd rajk-ecs
+       npx cdk destroy --force
