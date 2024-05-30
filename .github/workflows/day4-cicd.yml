@@ -74,7 +74,7 @@ jobs:
         cd rajk-ecs
         npm install
     
-    - name: setup aws login detials
+    - name: setup aws login details
       uses: aws-actions/configure-aws-credentials@v4
       with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
