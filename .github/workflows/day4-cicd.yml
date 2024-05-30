@@ -71,7 +71,7 @@ jobs:
          path: |
           ./rajk-ecs
 
-     rajk-cdk-build:
+  rajk-cdk-build:
      runs-on: ubuntu-latest
      needs: rajkumar-image-build
      steps:
