@@ -4,7 +4,7 @@ name: Rajkumar App containerization Pipeline
 on:
   push:
     branches:
-    - "dev"
+    - "dev2"
 
 #creating multiple jobs
 jobs:
