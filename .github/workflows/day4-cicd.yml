@@ -91,7 +91,6 @@ jobs:
         - name: install NPM modules for ecs
           run: |
            node -v
-           cd rajk-ecs
            npm install
     
         - name: setup aws login details
