@@ -102,7 +102,6 @@ jobs:
 
         - name: CDK deploy ecs code
           run: |
-           cd rajk-ecs
            npx cdk bootstrap
            npx cdk deploy --no-rollback --require-approval never
     
