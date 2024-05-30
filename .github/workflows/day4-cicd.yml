@@ -21,9 +21,10 @@ jobs:
     - name: Offical Sonarqube scan update
       uses: SonarSource/sonarqube-scan-action@v2.1.0
       with:
-        projectBaseDir: ./python-app-secret
+        projectBaseDir: .
         args: >
           -Dsonar.projectKey=rajk-project 
+          -Dsonar.exclusions=ecr/**,Dockerfile,compose.yml,*.html
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -63,31 +64,43 @@ jobs:
             echo "please wait while image is getting pushed"
             docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpython:v1${{ github.sha }}
 
-    - name: Installing node 20
-      uses: actions/setup-node@v2
+    - name: using uplodad
+      uses: actions/upload-artifacts@v4
       with:
-        node-version: '20'
-    
-    - name: install NPM modules for ecs
-      run: |
-        node -v
-        cd rajk-ecs
-        npm install
-    
-    - name: setup aws login details
-      uses: aws-actions/configure-aws-credentials@v4
-      with: 
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+         name: rajk-artifact
+         path: |
+          ./rajk-ecs
 
-    - name: CDK deploy ecs code
-      run: |
-        cd rajk-ecs
-        npx cdk bootstrap
-        npx cdk deploy --no-rollback --require-approval never
+     rajk-cdk-build:
+     runs-on: ubuntu-latest
+     needs: rajkumar-image-build
+     steps:
+
+        - name: Installing node 20
+          uses: actions/setup-node@v2
+          with:
+           node-version: '20'
     
-    - name: CDK destroy
-      run: |
-       cd rajk-ecs
-       npx cdk destroy --force
+        - name: install NPM modules for ecs
+          run: |
+           node -v
+           cd rajk-ecs
+           npm install
+    
+        - name: setup aws login details
+          uses: aws-actions/configure-aws-credentials@v4
+          with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+        - name: CDK deploy ecs code
+          run: |
+           cd rajk-ecs
+           npx cdk bootstrap
+           npx cdk deploy --no-rollback --require-approval never
+    
+        - name: CDK destroy
+          run: |
+           cd rajk-ecs
+           npx cdk destroy --force
