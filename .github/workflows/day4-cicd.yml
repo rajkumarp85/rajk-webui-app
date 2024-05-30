@@ -63,10 +63,14 @@ jobs:
             echo "please wait while image is getting pushed"
             docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpython:v1${{ github.sha }}
 
-    - name: cdk version detials
+    - name: Installing node 20
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+    
+    - name: install NPM modules for ecs
       run: |
         node -v
-        npm -v
-        cdk --version
-        aws --version
+        cd rajk-ecs
+        npm install
     
