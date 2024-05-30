@@ -37,3 +37,5 @@ jobs:
         docker-compose ps
         sleep 1
         docker-compose logs
+    - name: chekcing trivy
+      run: trivy -v
