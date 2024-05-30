@@ -30,7 +30,7 @@ jobs:
 
     - name: Docker python app build
       run: |
-        ls -a
+        ls -al
         cd python-app-secret
         docker-compose up -d
         sleep 2
