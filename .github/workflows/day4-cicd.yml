@@ -62,3 +62,11 @@ jobs:
       run: |
             echo "please wait while image is getting pushed"
             docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpython:v1${{ github.sha }}
+
+    - name: cdk version detials
+      run: |
+        node -v
+        npm -v
+        cdk --version
+        aws --version
+    
