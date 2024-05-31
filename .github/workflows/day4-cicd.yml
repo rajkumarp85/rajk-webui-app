@@ -104,4 +104,11 @@ jobs:
           run: |
            npx cdk bootstrap
            npx cdk deploy --context imageTag=${{ github.sha }} --require-approval never
-    
+  rajk-app-deploy-eks:
+    runs-on: ubuntu-latest
+    needs: rajk-cdk-build
+    steps:
+    - name: checking kube
+      run: |
+        echo ""
+        kubectl version --client
