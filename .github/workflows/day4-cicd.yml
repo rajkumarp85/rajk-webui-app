@@ -47,7 +47,7 @@ jobs:
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.20.0
       with:
-          image-ref: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpythonweb:v1${{ github.sha }}'
+          image-ref: 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpythonweb:v1${{ github.sha }}'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: true
@@ -55,7 +55,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
     - name: try to login from runner to docker hub account 
-      uses: docker/login-action@v3 
+      uses: docker/login-action@v3
       with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_PASSWORD }}
