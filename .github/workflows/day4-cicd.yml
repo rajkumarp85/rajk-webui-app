@@ -33,7 +33,7 @@ jobs:
     - name: Docker python app build
       run: |
         ls -al
-        cd python-app-secret
+        # cd python-app-secret
         docker-compose up -d
         sleep 2
         docker-compose ps
@@ -41,13 +41,13 @@ jobs:
         docker-compose logs
     - name: Build an image from Dockerfile
       run: |
-          cd python-app-secret
-          docker build -t docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpython:v1${{ github.sha }} .
+         # cd python-app-secret
+          docker build -t docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpythonweb:v1${{ github.sha }} .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.20.0
       with:
-          image-ref: 'rajkpython:v1'
+          image-ref: 'rajkpythonweb:v1'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: true
@@ -63,7 +63,7 @@ jobs:
     - name: pushing image to docker hub 
       run: |
             echo "please wait while image is getting pushed"
-            docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpython:v1${{ github.sha }}
+            docker push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rajkpythonweb:v1${{ github.sha }}
 
     - name: using uplodad
       uses: actions/upload-artifact@v4

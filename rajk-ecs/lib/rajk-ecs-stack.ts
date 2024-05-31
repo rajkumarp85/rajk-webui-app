@@ -22,17 +22,34 @@ export class RajkEcsStack extends cdk.Stack {
 
   
       // task Definition of farget launch type 
-      const ashuTaskDef = new ecs.FargateTaskDefinition(this,'rajk-frg-task1',{
+      const rajkTaskDef = new ecs.FargateTaskDefinition(this,'rajk-frg-task1',{
         cpu:  256,
         memoryLimitMiB: 512
          
       });
       // adding container info 
-      const container = ashuTaskDef.addContainer('rajkcdkc1',{
+      const container = rajkTaskDef.addContainer('rajkcdkc1',{
         image: ecs.ContainerImage.fromRegistry('rajkumarp85/rajkpython:v1a75a2c3a6177b54cc9831308aa9fed55086cddee'),
         memoryLimitMiB: 256,
         portMappings: [{ containerPort: 80 }]
       });
+
+  // creating security group 
+      const ashusecgroup = new ec2.SecurityGroup(this,'ashufirewallgrp',{
+        vpc: vpc,
+        description: 'allow ingress rules for 80 port'
+      });
+      ashusecgroup.addIngressRule(ec2.Peer.anyIpv4(),ec2.Port.tcp(80),'allow http traffic');
+
+      const service = new ecs.FargateService(this,'rajkECSserviceCDK',{
+        cluster,
+        taskDefinition: rajkTaskDef,
+        serviceName: 'rajk-svc-bycdk',
+        desiredCount: 2,
+        assignPublicIp: true,
+        securityGroups: [ashusecgroup]   // attaching security group 
+      });
+
 
   }
 }
